@@ -1,0 +1,7 @@
+macro(VIO_SLAM SLAM_SRC)
+    file(GLOB_RECURSE Sensor_SRC ${PROJECT_SOURCE_DIR}/src/Sensors/*.*)
+    file(GLOB_RECURSE UI_SRC ${PROJECT_SOURCE_DIR}/src/QtUI/*.*)
+    file(GLOB_RECURSE Util_SRC ${PROJECT_SOURCE_DIR}/src/Util/*.*)
+    file(GLOB_RECURSE S_SRC ${PROJECT_SOURCE_DIR}/src/SLAM/*.*)
+    list(APPEND SLAM_SRC ${Sensor_SRC} ${UI_SRC} ${Util_SRC} ${S_SRC})
+endmacro()
