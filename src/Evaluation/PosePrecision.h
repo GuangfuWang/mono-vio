@@ -1,0 +1,10 @@
+
+#ifndef MONO_VIO_POSEPRECISION_H
+#define MONO_VIO_POSEPRECISION_H
+
+namespace gf{
+
+
+}
+
+#endif //MONO_VIO_POSEPRECISION_H
