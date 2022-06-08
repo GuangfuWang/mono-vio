@@ -4,7 +4,6 @@
 
 #include <QMainWindow>
 
-
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindowUI; }
 QT_END_NAMESPACE

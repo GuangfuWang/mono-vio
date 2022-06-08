@@ -1,0 +1,12 @@
+#ifndef MONO_VIO_VISUALINITIALALIGNMENT_HPP
+#define MONO_VIO_VISUALINITIALALIGNMENT_HPP
+
+#include <src/Util/TypeDef.h>
+
+namespace gf{
+
+
+}
+
+
+#endif //MONO_VIO_VISUALINITIALALIGNMENT_HPP

@@ -62,6 +62,12 @@ namespace gf {
         std::this_thread::sleep_for(std::chrono::milliseconds(milliSeconds));
     }
 
+    inline uint64_t GetCurrentMilliTimeStamp() {
+        uint64_t ret = std::chrono::duration_cast<std::chrono::milliseconds>
+                (std::chrono::system_clock::now().time_since_epoch()).count();
+        return ret;
+    }
+
 }
 
 
