@@ -22,6 +22,7 @@ tracker:
   failIfFeatureLessThan: 30
   robustKernel: Huber
   gravity: 9.80766
+  numCamera: 1
 sensorCamera:
   vendor: Microsoft
   series: Kinect Azure
