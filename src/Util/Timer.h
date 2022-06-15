@@ -44,7 +44,7 @@ namespace gf {
          */
         inline unsigned int tock() {
             unsigned int total = std::chrono::duration_cast<std::chrono::milliseconds>(
-                    std::chrono::system_clock::now() - start_).count();
+                    std::chrono::system_clock::now() - t_).count();
             start_ = t_ = std::chrono::system_clock::now();
             return total;
         }

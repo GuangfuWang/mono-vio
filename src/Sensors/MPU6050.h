@@ -1,7 +1,6 @@
 #ifndef MONO_VIO_MPU6050_H
 #define MONO_VIO_MPU6050_H
 
-namespace gf {
 //-------------------------------MPU6050 Accelerometer and Gyroscope C++ library-----------------------------
 //Copyright (c) 2019, Alex Mous
 //Licensed under the CC BY-NC SA 4.0
@@ -37,16 +36,19 @@ namespace gf {
 
 //-----------------------END MODIFY THESE PARAMETERS-----------------------
 
-#include <iostream>
+//#include <iostream>
+#include <stdint.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <time.h>
+
 extern "C" {
 #include <linux/i2c-dev.h>
 #include <i2c/smbus.h>
 }
+
 #include <cmath>
 #include <thread>
 
@@ -87,44 +89,43 @@ extern "C" {
 #undef ACCEL_RANGE
 
 
-    class MPU6050 {
-    private:
-        void _update();
+class MPU6050 {
+private:
+    void _update();
 
-        float _accel_angle[3];
-        float _gyro_angle[3];
-        float _angle[3]; //Store all angles (accel roll, accel pitch, accel yaw, gyro roll, gyro pitch, gyro yaw, comb roll, comb pitch comb yaw)
+    float _accel_angle[3];
+    float _gyro_angle[3];
+    float _angle[3]; //Store all angles (accel roll, accel pitch, accel yaw, gyro roll, gyro pitch, gyro yaw, comb roll, comb pitch comb yaw)
 
-        float ax, ay, az, gr, gp, gy; //Temporary storage variables used in _update()
+    float ax, ay, az, gr, gp, gy; //Temporary storage variables used in _update()
 
-        int MPU6050_addr;
-        int f_dev; //Device file
+    int MPU6050_addr;
+    int f_dev; //Device file
 
-        float dt; //Loop time (recalculated with each loop)
+    float dt; //Loop time (recalculated with each loop)
 
-        struct timespec start, end; //Create a time structure
+    struct timespec start, end; //Create a time structure
 
-        bool _first_run = 1; //Variable for whether to set gyro angle to acceleration angle in compFilter
-    public:
-        MPU6050(int8_t addr);
+    bool _first_run = 1; //Variable for whether to set gyro angle to acceleration angle in compFilter
+public:
+    MPU6050(int8_t addr);
 
-        MPU6050(int8_t addr, bool run_update_thread);
+    MPU6050(int8_t addr, bool run_update_thread);
 
-        void getAccelRaw(float *x, float *y, float *z);
+    void getAccelRaw(float *x, float *y, float *z);
 
-        void getGyroRaw(float *roll, float *pitch, float *yaw);
+    void getGyroRaw(float *roll, float *pitch, float *yaw);
 
-        void getAccel(float *x, float *y, float *z);
+    void getAccel(float *x, float *y, float *z);
 
-        void getGyro(float *roll, float *pitch, float *yaw);
+    void getGyro(float *roll, float *pitch, float *yaw);
 
-        void getOffsets(float *ax_off, float *ay_off, float *az_off, float *gr_off, float *gp_off, float *gy_off);
+    void getOffsets(float *ax_off, float *ay_off, float *az_off, float *gr_off, float *gp_off, float *gy_off);
 
-        int getAngle(int axis, float *result);
+    int getAngle(int axis, float *result);
 
-        bool calc_yaw;
-    };
-}
+    bool calc_yaw;
+};
 
 
 #endif //MONO_VIO_MPU6050_H

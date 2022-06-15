@@ -262,15 +262,14 @@ namespace gf {
 
 
 }
-QString gf::Logger::mLogFile       = "";
-bool    gf::Logger::mLogToFileFlag = false;
+
 using Logger = gf::Logger;
 #ifdef __GNUC__
 #ifndef GF_DEBUG
 #define GF_DEBUG(MSG, ...)  Logger::Debug(MSG, ##__VA_ARGS__)
 #endif
 #ifndef GF_WARN
-#define GF_WARN(MSG, ...)  Logger::Warnning(MSG, ##__VA_ARGS__)
+#define GF_WARN(MSG, ...)  Logger::Warning(MSG, ##__VA_ARGS__)
 #endif
 #ifndef GF_INFO
 #define GF_INFO(MSG, ...)  Logger::Info(MSG, ##__VA_ARGS__)

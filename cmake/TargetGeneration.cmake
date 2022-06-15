@@ -18,5 +18,5 @@ endif ()
 add_executable(mono_vio ${PLAT_FLAG} Main.cpp ${SLAM_SRC})
 target_include_directories(${PROJECT_NAME} PRIVATE ${OpenCV_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} PRIVATE Sophus::Sophus ${G2O_LIBS} yaml-cpp ${OpenCV_LIBS})
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets Qt5::Core Qt5::Gui Qt5::OpenGL
-        Qt::Charts Qt5::Charts Qt::ChartsPrivate Qt5::ChartsPrivate)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt5::Widgets Qt5::Core Qt5::Gui Qt5::OpenGL)
+target_link_libraries(${PROJECT_NAME} PRIVATE  -lpthread -li2c)

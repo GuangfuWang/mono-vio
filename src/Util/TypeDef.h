@@ -3,9 +3,11 @@
 #define MONO_VIO_TYPEDEF_H
 
 #include <memory>
+#include <thread>
 #include <map>
 #include <vector>
 #include <list>
+#include <functional>
 #include <Eigen/Dense>
 #include <sophus/se3.hpp>
 
@@ -25,6 +27,12 @@ namespace gf {
     constexpr UniqueRef<T> createUniqueRef(Args &&... args) {
         return std::make_unique<T>(std::forward<Args>(args)...);
     }
+
+    template<typename Ret, typename ... Args>
+    using Function = std::function<Ret(Args...)>;
+
+    template<unsigned char N>
+    using ThreadPool = std::array<std::thread,N>;
 
     template<typename T>
     using Vector = std::vector<T>;
