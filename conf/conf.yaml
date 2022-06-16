@@ -1,6 +1,6 @@
 %YAML:1.0
 # This file is used for mino-vio project configuration.
-projectInfo:
+ProjectInfo:
   versionMajor: 1
   versionMinor: 2
   versionPatch: 0
@@ -12,48 +12,63 @@ projectInfo:
   license: MIT
   contributionList:
     - Guangfu Wang, thuwgf@gmail.com
-    - Place_Holder
-init:
-  sfmWindowSize: 10
-tracker:
+Tracker:
   fastThreshold: 9
   scaleFactor: 1.2
   numPyramid: 8
-  failIfFeatureLessThan: 30
+  failIfFeatureLessThan: 25
+  lowKeyPointThreshold: 30
+  lowKeyPointFrame: 8
+  maxFeatureDescriptorDist: 0.6
   robustKernel: Huber
   gravity: 9.80766
   numCamera: 1
-sensorCamera:
-  vendor: Microsoft
-  series: Kinect Azure
-  type: RGB-D
-  fx: 364.032
-  fy: 364.032
-  cx: 259.891
-  cy: 209.320
-  k1: -1
-  k2: -1
-  p1: -1
-  p2: -1
-sensorIMU:
-  vendor: JiXing
-  series: MPU6050
-  frequency: 200
-  initExcitationAccThreshold: 0.25
-  imuCameraExtrinsicFlag: 2
-  imuCameraExtrinsicTranslation:
-    -tx: 0.0
-    -ty: 0.0
-    -tz: 0.0
-  imuCameraExtrinsicQuaternion:
-    -w: 1.0
-    -x: 0.0
-    -y: 0.0
-    -z: 0.0
-  interpolationMethod: MidPoint # only two options: MidPoint or Euler
-  accelerationNoise: 0.04
-  accelerationBiasNoise: 0.0004
-  gyroscopeNoise: 0.004
-  gyroscopeBiasNoise: 2.0e-5
+  firstImagePose:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    qw: 1.0
+    qx: 0.0
+    qy: 0.0
+    qz: 0.0
+SlideWindowOptimization:
+  sfmWindowSize: 10
+LoopDetection:
+  strategy: sampling
+PoseGraphOptimization:
+  maxIterations: 10
+Sensor:
+  sensorCamera:
+    vendor: Microsoft
+    series: Kinect Azure
+    type: RGB-D
+    fx: 364.032
+    fy: 364.032
+    cx: 259.891
+    cy: 209.320
+    k1: -1
+    k2: -1
+    p1: -1
+    p2: -1
+  sensorIMU:
+    vendor: JiXing
+    series: MPU6050
+    frequency: 200
+    initExcitationAccThreshold: 0.25
+    imuCameraExtrinsicFlag: 2
+    imuCameraExtrinsicTranslation:
+      -tx: 0.0
+      -ty: 0.0
+      -tz: 0.0
+    imuCameraExtrinsicQuaternion:
+      -w: 1.0
+      -x: 0.0
+      -y: 0.0
+      -z: 0.0
+    interpolationMethod: MidPoint # only two options: MidPoint or Euler
+    accelerationNoise: 0.04
+    accelerationBiasNoise: 0.0004
+    gyroscopeNoise: 0.004
+    gyroscopeBiasNoise: 2.0e-5
 UISetting:
   MSAA: 4

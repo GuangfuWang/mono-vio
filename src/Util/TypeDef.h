@@ -12,6 +12,10 @@
 #include <sophus/se3.hpp>
 
 namespace gf {
+#ifndef GF_ASSERT(CONDITION,MSG)
+#define GF_ASSERT(CONDITION,MSG) assert((MSG,CONDITION))
+#endif
+
     template<typename T>
     using UniqueRef = std::unique_ptr<T>;
     template<typename T>
@@ -68,7 +72,7 @@ namespace gf {
     using Vector6d = Eigen::Array<double, 6, 1>;
     using Vector6i = Eigen::Array<int, 6, 1>;
     using Quaternion = Eigen::Quaterniond;
-    using Translation = Eigen::Vector3f;
+    using Translation = Eigen::Vector3d;
     using RigidTransform = Eigen::Isometry3d;
     using LieGroupSE3 = Sophus::SE3d;
     using LieGroupSO3 = Sophus::SO3d;

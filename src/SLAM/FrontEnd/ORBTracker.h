@@ -8,6 +8,7 @@
 #include <src/Util/Timer.h>
 #include <src/Util/TypeDef.h>
 #include <QString>
+#include "ImageFrame.hpp"
 
 namespace gf {
     class ORBTracker final {
@@ -20,7 +21,7 @@ namespace gf {
 
         ORBTracker(const ORBTracker &c) = delete;
 
-        bool DetectAndMatch();
+        bool DetectAndMatch(ImageFrame& curr);
 
         void WriteTimeRecordToFile(const QString &file);
 
@@ -28,33 +29,55 @@ namespace gf {
 
         void Reset();
 
+        void Track(const cv::Mat& img,const TimeStampType &time);
+
+    public:
+        const List<unsigned int> &getMKeyPointExtractionTime() const;
+
+        void setMKeyPointExtractionTime(const List<unsigned int> &mKeyPointExtractionTime);
+
+        const List<unsigned int> &getMComputeDescriptorTime() const;
+
+        void setMComputeDescriptorTime(const List<unsigned int> &mComputeDescriptorTime);
+
+        const List<unsigned int> &getMFeatureMatchTime() const;
+
+        void setMFeatureMatchTime(const List<unsigned int> &mFeatureMatchTime);
+
+        unsigned int getMImageFrameCount() const;
+
+        void setMImageFrameCount(unsigned int mImageFrameCount);
+
     private:
         bool DetectKeyPoints(const cv::Mat &sourceImg, Vector<cv::KeyPoint> &dstKeyPoints);
 
         bool ComputeDescriptors(const cv::Mat &sourceImg, Vector<cv::KeyPoint> &keyPoints,
                                 cv::OutputArray &descriptors);
 
-        bool FeatureMatch();
-
     private:
+        /// orb tracker object, normally will not change during runtime.
         cv::Ptr<cv::ORB>               mOrbTracker;
         cv::Ptr<cv::DescriptorMatcher> mMatcher;
+        cv::Point2d                    mPrinciplePoint;
+        double                         mFocalLen;
 
-        cv::Mat              mImagePrev;
-        cv::Mat              mImageCurr;
+        cv::Mat       mImagePrev;
+        cv::Mat       mImageCurr;
+        TimeStampType mCurrFrameTime;
+
         Vector<cv::KeyPoint> mPrevKeyPoints;
         Vector<cv::KeyPoint> mCurrentKeyPoints;
-        cv::Mat              mPrevDescriptors;
-        cv::Mat              mCurrentDescriptors;
-        Vector<cv::DMatch>   mCurrentMatches;
-        cv::Mat              mCurrentRotation;
-        cv::Mat              mCurrentTranslate;
 
-        SharedRef<Timer> mTimer;
-        List<double>     mKeyPointExtractionTime;
-        List<double>     mComputeDescriptorTime;
-        List<double>     mFeatureMatchTime;
-        unsigned int     mImageFrameCount;
+        cv::Mat      mPrevDescriptors;
+        cv::Mat      mCurrentDescriptors;
+        unsigned int mKeyPointFailCount;
+
+        SharedRef<Timer>   mTimer;
+        //time is in millisecond.
+        List<unsigned int> mKeyPointExtractionTime;
+        List<unsigned int> mComputeDescriptorTime;
+        List<unsigned int> mFeatureMatchTime;
+        ImageFrameIDType   mImageFrameCount;
 
     };
 }
