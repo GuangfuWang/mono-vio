@@ -29,7 +29,7 @@ namespace gf {
 
         void Reset();
 
-        void Track(const cv::Mat& img,const TimeStampType &time);
+        void Track(const cv::Mat& img,const TimeStampType &time,ImageFrame& curr);
 
     public:
         const List<unsigned int> &getMKeyPointExtractionTime() const;
@@ -64,9 +64,12 @@ namespace gf {
         cv::Mat       mImagePrev;
         cv::Mat       mImageCurr;
         TimeStampType mCurrFrameTime;
+        TimeStampType mPrevFrameTime;
 
         Vector<cv::KeyPoint> mPrevKeyPoints;
         Vector<cv::KeyPoint> mCurrentKeyPoints;
+        Vector<FeaturePerID> mFeatures;
+        Vector<unsigned int> mFeatureMap;// same size with mPrevKeyPoints, value represents Position in mFeatures.
 
         cv::Mat      mPrevDescriptors;
         cv::Mat      mCurrentDescriptors;
@@ -77,6 +80,7 @@ namespace gf {
         List<unsigned int> mKeyPointExtractionTime;
         List<unsigned int> mComputeDescriptorTime;
         List<unsigned int> mFeatureMatchTime;
+        List<unsigned int> mFrontEndTime;
         ImageFrameIDType   mImageFrameCount;
 
     };

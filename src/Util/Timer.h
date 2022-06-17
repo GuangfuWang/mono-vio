@@ -68,6 +68,10 @@ namespace gf {
         return ret;
     }
 
+    inline uint64_t Tick(){
+        return GetCurrentMilliTimeStamp();
+    }
+
 }
 
 
